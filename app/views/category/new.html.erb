@@ -1,0 +1,44 @@
+<% @title="Cadastrar Categorias" %>
+
+<%= render partial: 'item/nav', locals: { item: @item } %>
+
+<br>
+<br>
+
+<div class = "container">
+  <%= form_for Category.new ,:url => {:action => :create, :controller => :category}  do |f| %>
+    
+    <div class="form-group">
+      <%= f.label :name, 'Nome da Categoria:' %>
+      <%= f.text_field :name, class: "form-control col-6" %>
+    </div>
+
+    <p>
+    <%= f.submit 'Criar', class:"btn btn-outline-success col-5 my-2 my-sm-0" %>
+    </p>
+
+  <% end %>
+
+</div>
+
+<div class="container">
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col-3">Categorias</th>
+       <th scope="col-3"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+  <% Category.all.each do |c| %>
+    <tr>
+    
+    <td><%= c.name %></td>
+     <td> <%= link_to 'Apagar', category_path(id: c.id), method: :delete,
+      data: { confirm: 'Quer apagar esta tarefa?' }, class:"btn btn-outline-danger my-2 my-sm-0"%></td>
+    </tr>
+    
+  <% end %>
+  </tbody>
+</div>

@@ -1,0 +1,22 @@
+<% @title="Cadastrar Item de Estudo" %>
+
+    <%= render partial: 'nav', locals: { item: @item } %>
+
+
+<div class = "container">
+
+
+  <%= form_for Item.new ,:url => {:action => :create, :controller => :item}  do |f| %>
+
+    <%= render partial: 'form', locals: { f: f } %>
+
+    <br>
+    
+    <div class="form-group">
+    <%= f.submit 'Criar', class:"btn btn-outline-success col-5 my-2 my-sm-0" %>
+    </div>
+
+  <% end %>
+
+
+</div>

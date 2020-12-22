@@ -1,0 +1,44 @@
+<% @title="Entrar" %>
+
+<div class="container h-100">
+	<div class="d-flex justify-content-center h-100">
+		<div class="user_card">
+
+      <div class="d-flex justify-content-center form_container">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <h2>Entrar</h2>
+              <br>
+                        
+          <div class="input-group mb-3">
+            <%= f.label :email, class:"input-group-text" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control input_user", placeholder:"Email" %>
+          </div>
+
+          <div  class="input-group mb-2">
+            <%= f.label :senha, class:"input-group-text" %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class:"form-control input_pass", placeholder:"Senha" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+          
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+
+          <div class="actions">
+          <div class="d-flex justify-content-center mt-3 login_container">
+            <%= f.submit "Entrar",class:"btn login_btn" %>
+            </div>
+          </div>
+        <% end %>
+        </div>
+
+        <div class="mt-4">
+		      <div class="d-flex justify-content-center links">
+            <%= render "users/shared/links" %>
+		      </div>
+	  </div>
+	</div>
+</div>

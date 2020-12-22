@@ -1,0 +1,73 @@
+
+<div class="container">
+  
+  <br>
+  <h3>Itens de Estudo</h3>
+  <br>
+
+<table class="table">
+  <thead class="thead" style="background: #FFBF00;">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Nome</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Prazo</th>
+      <th scope="col">Status</th>
+      <th scope="col">Feito?</th>
+      <th scope="col">Comentário</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Apagar</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  <% @items.all.each do |item| %>
+    <tr>
+    <th scope="row"></th>
+    <td><%= item.name %></td>
+    <td><%= item.category %></td>
+    <td>
+    <%if item.tipo == 'Texto'%>
+      <%= bootstrap_icon "file-earmark-word-fill", width: 25, height: 25, fill: "blue" %>
+    <%elsif item.tipo == 'Palestra'%>
+      <%= bootstrap_icon "chat-dots-fill", width: 25, height: 25, fill: "grey" %>   
+    <%elsif item.tipo == 'Video'%>
+      <%= bootstrap_icon "play-fill", width: 25, height: 25, fill: "red" %>
+    <%elsif item.tipo == 'Apostila'%>
+      <%= bootstrap_icon "journal-code", width: 25, height: 25, fill: "green" %>
+    <%elsif item.tipo == 'Curso'%>
+      <%= bootstrap_icon "camera-video-fill", width: 25, height: 25, fill: "black" %>
+    <%end%>
+    </td>
+    <td><%= item.description %></td>
+    <td><%= item.deadline %></td>
+    <td>
+      <%if item.done%>
+        <span style="color: green;"><strong> Feito </strong ></span>
+      <% elsif item.deadline &&(item.deadline > Date.current)%>
+        <span style="color: blue;"><strong> Á fazer </strong ></span>
+      <%elsif item.deadline &&(item.deadline < Date.current)%>
+         <span style="color: red;"><strong> Atrasado </strong ></span>
+        <%elsif item.deadline &&(item.deadline == Date.current)%>
+         <span style="color: orange;"><strong> Fazer Hoje </strong ></span>
+      <%end%>
+    </td>
+    <td>
+    <%if item.done %>
+      <%= 'Sim' %>
+      <%else%>
+        <%= 'Não' %>
+    <%end%>
+    </td>
+
+    <td><%= item.comment %></td>
+    <td><%= link_to 'Editar', edit_item_path(item), class:"btn btn-outline-secondary my-2 my-sm-0"  %></td>
+    <td> <%= link_to 'Apagar', item_path(item), method: :delete,
+    data: { confirm: 'Quer apagar esta tarefa?' }, class:"btn btn-outline-danger my-2 my-sm-0" %></td>
+    </tr>
+    
+  <% end %>
+  </tbody>
+</div>
